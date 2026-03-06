@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workshop-app
+  namespace: workshop
+  labels:
+    app: workshop-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workshop-app
+  # Rolling update strategy — zero downtime deployments
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1        # Allow 1 extra pod during update
+      maxUnavailable: 0  # Never go below desired replica count
+  template:
+    metadata:
+      labels:
+        app: workshop-app
+    spec:
+      containers:
+        - name: workshop-app
+          # Using local image built in step-02
+          image: docker-k8s-workshop:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          # Load config from ConfigMap
+          envFrom:
+            - configMapRef:
+                name: app-config
+          # Load individual secrets
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_PASSWORD
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          # Health checks
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 3

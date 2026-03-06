@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  # ── Our Node.js application ──────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: docker-k8s-workshop:v1
+    container_name: workshop-app
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - APP_VERSION=v1
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - workshop-net
+
+  # ── Redis for visit counting ─────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: workshop-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - workshop-net
+
+volumes:
+  redis-data:
+
+networks:
+  workshop-net:
+    driver: bridge
