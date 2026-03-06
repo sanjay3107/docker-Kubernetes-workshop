@@ -1,0 +1,674 @@
+# DOCKER BASICS - PROFESSIONAL PRESENTATION
+# Copy each slide into PowerPoint with suggested layouts
+
+================================================================================
+SLIDE 1: TITLE SLIDE
+Layout: Title Slide
+================================================================================
+
+Title: Introduction to Docker
+Subtitle: Containerization Made Simple
+Your Name/Institution
+Date
+
+Background: Docker blue gradient (#2496ED)
+Logo: Docker whale logo (top right)
+
+================================================================================
+SLIDE 2: AGENDA
+Layout: Title and Content
+================================================================================
+
+Title: What We'll Cover Today
+
+Content (Bullet points with icons):
+🐳 What is Docker?
+🔥 Problems Docker Solves
+🆚 Docker vs Virtual Machines
+🧱 Core Concepts (Images & Containers)
+🌐 Docker Hub
+🎓 Hands-On Demo
+🚀 Next Steps
+
+Time: 30 minutes
+
+================================================================================
+SLIDE 3: WHAT IS DOCKER?
+Layout: Two Content
+================================================================================
+
+Title: What is Docker?
+
+Left Column:
+Definition:
+Docker is a platform that packages applications with everything they need to run, then runs them anywhere.
+
+Key Points:
+• 🐳 Open-source platform
+• 📦 Package app + dependencies
+• 🚀 Run consistently everywhere
+• ⚡ Lightweight and fast
+
+Right Column:
+[IMAGE: Docker logo and container illustration]
+
+Tagline at bottom:
+"Build once, run anywhere"
+
+================================================================================
+SLIDE 4: THE SHIPPING CONTAINER ANALOGY
+Layout: Comparison
+================================================================================
+
+Title: The Shipping Container Analogy
+
+Left Side - Before Containers (1950s):
+[IMAGE: Old cargo ship]
+• Every ship was different
+• Loading took weeks
+• Items got damaged
+• Chaos at ports
+
+Right Side - After Containers:
+[IMAGE: Modern container ship]
+• Standardized boxes
+• Load/unload in hours
+• Items protected
+• Works on any ship
+
+Bottom text (large):
+Docker does the same for software! 🚢 → 🐳
+
+================================================================================
+SLIDE 5: THE PROBLEM - "IT WORKS ON MY MACHINE"
+Layout: Content with Sidebar
+================================================================================
+
+Title: The "It Works on My Machine" Problem
+
+Main Content:
+WITHOUT DOCKER:
+
+Developer's Laptop ✅
+├── Python 3.9
+├── Node.js 18
+└── App works!
+
+Teammate's Laptop ❌
+├── Python 3.7 (wrong!)
+├── Node.js 16 (wrong!)
+└── App broken!
+
+Production Server ❌
+├── Different OS
+├── Missing libraries
+└── App crashes!
+
+Sidebar:
+[IMAGE: Frustrated developer]
+Manual work = Nightmare 😫
+
+================================================================================
+SLIDE 6: THE SOLUTION - WITH DOCKER
+Layout: Content with Sidebar
+================================================================================
+
+Title: With Docker - Consistency Everywhere
+
+Main Content:
+WITH DOCKER:
+
+Developer's Laptop ✅
+└── Docker Container
+    ├── Python 3.9
+    ├── Node.js 18
+    └── App works!
+
+Teammate's Laptop ✅
+└── Same Container
+    └── App works!
+
+Production Server ✅
+└── Same Container
+    └── App works!
+
+Sidebar:
+[IMAGE: Happy developer]
+Same environment = Same behavior ✨
+
+================================================================================
+SLIDE 7: REAL-WORLD BENEFITS
+Layout: Three Columns
+================================================================================
+
+Title: Real-World Benefits
+
+Column 1 - For Developers:
+✅ Consistent development
+✅ Easy onboarding (minutes!)
+✅ No "works on my machine"
+✅ Test locally like production
+
+Column 2 - For Operations:
+✅ Predictable deployments
+✅ Easy scaling
+✅ Efficient resources
+✅ Quick rollbacks
+
+Column 3 - For Business:
+✅ Faster time to market
+✅ Lower infrastructure costs
+✅ Improved reliability
+✅ Happy customers
+
+================================================================================
+SLIDE 8: DOCKER VS VIRTUAL MACHINES - ARCHITECTURE
+Layout: Comparison
+================================================================================
+
+Title: Docker vs Virtual Machines - Architecture
+
+Left Side - Virtual Machine:
+[DIAGRAM]
+┌─────────────────┐
+│  Your Computer  │
+├─────────────────┤
+│   Hypervisor    │
+├─────────────────┤
+│ ┌─────┐ ┌─────┐│
+│ │ VM1 │ │ VM2 ││
+│ │ OS  │ │ OS  ││ ← Full OS each!
+│ │ App │ │ App ││
+│ └─────┘ └─────┘│
+└─────────────────┘
+
+Right Side - Docker:
+[DIAGRAM]
+┌─────────────────┐
+│ Your Computer   │
+├─────────────────┤
+│ Docker Engine   │
+├─────────────────┤
+│ ┌───┐┌───┐┌───┐│
+│ │App││App││App││ ← Shares OS!
+│ └───┘└───┘└───┘│
+└─────────────────┘
+
+================================================================================
+SLIDE 9: DOCKER VS VMS - COMPARISON TABLE
+Layout: Table
+================================================================================
+
+Title: Docker vs VMs - Comparison
+
+| Feature          | Virtual Machine | Docker Container |
+|------------------|-----------------|------------------|
+| Size             | 2-20 GB         | 10-500 MB       |
+| Boot Time        | 1-2 minutes     | 1-2 seconds     |
+| Performance      | Slower          | Near-native     |
+| Resource Usage   | Heavy           | Lightweight     |
+| Isolation        | Complete        | Process-level   |
+| Portability      | Medium          | High            |
+
+Key Takeaway (large text):
+Containers are much lighter and faster! ⚡
+
+================================================================================
+SLIDE 10: CORE CONCEPT #1 - DOCKER IMAGE
+Layout: Content with Image
+================================================================================
+
+Title: Core Concept #1 - Docker Image 🖼️
+
+Left Content:
+What is an Image?
+• 📋 Blueprint/template
+• 📦 Contains app + dependencies
+• 🔒 Read-only (immutable)
+• 💾 Stored locally or Docker Hub
+
+Analogy:
+Like a RECIPE 📖
+Like a CLASS in programming
+Like a COOKIE CUTTER
+
+Right Side:
+[IMAGE: Blueprint or recipe card illustration]
+
+Example:
+python:3.9 image contains:
+├── Linux OS (minimal)
+├── Python 3.9
+└── pip package manager
+
+================================================================================
+SLIDE 11: CORE CONCEPT #2 - DOCKER CONTAINER
+Layout: Content with Image
+================================================================================
+
+Title: Core Concept #2 - Docker Container 📦
+
+Left Content:
+What is a Container?
+• ▶️ Running instance of image
+• 🏃 Isolated environment
+• ✍️ Can read/write while running
+• ⏱️ Temporary (unless saved)
+
+Analogy:
+Like a DISH from recipe 🍝
+Like an OBJECT/INSTANCE
+Like a COOKIE from cutter
+
+Right Side:
+[IMAGE: Running container illustration]
+
+Example:
+From python:3.9 image:
+├── Container 1 (web app)
+├── Container 2 (API)
+└── Container 3 (tests)
+
+================================================================================
+SLIDE 12: IMAGE → CONTAINER RELATIONSHIP
+Layout: Diagram
+================================================================================
+
+Title: Image → Container Relationship
+
+[LARGE DIAGRAM in center]
+┌─────────────────┐
+│  Docker Image   │  ← Blueprint
+│   "python:3.9"  │    (stored)
+└────────┬────────┘
+         │
+         ├──→ Container 1 (running)
+         ├──→ Container 2 (running)
+         ├──→ Container 3 (running)
+         └──→ Container 4 (stopped)
+
+Key Point (large text):
+One image → Many containers
+Like one cookie cutter → Many cookies 🍪
+
+================================================================================
+SLIDE 13: DOCKER HUB - THE IMAGE REGISTRY
+Layout: Content with Screenshot
+================================================================================
+
+Title: Docker Hub - The Image Registry 🌐
+
+Left Content:
+What is Docker Hub?
+• Public registry for images
+• Like GitHub for Docker
+• Free to use
+• Official verified images
+
+Popular Images:
+nginx     - 1B+ downloads
+python    - 1B+ downloads
+node      - 1B+ downloads
+redis     - 1B+ downloads
+postgres  - 500M+ downloads
+
+Right Side:
+[SCREENSHOT: Docker Hub website]
+
+URL: https://hub.docker.com
+
+================================================================================
+SLIDE 14: DOCKER WORKFLOW
+Layout: Process Flow
+================================================================================
+
+Title: Docker Workflow
+
+[CIRCULAR FLOW DIAGRAM]
+
+1. Pull Image
+   ↓
+   docker pull python:3.9
+
+2. Run Container
+   ↓
+   docker run python:3.9
+
+3. Develop & Test
+   ↓
+   (Make changes)
+
+4. Build Custom Image
+   ↓
+   docker build -t myapp
+
+5. Push to Registry
+   ↓
+   docker push myapp
+
+6. Deploy Anywhere
+   ↓
+   docker run myapp
+
+================================================================================
+SLIDE 15: LIVE DEMO - YOUR FIRST CONTAINER
+Layout: Terminal/Code
+================================================================================
+
+Title: DEMO - Your First Container 🎉
+
+Terminal commands (large monospace font):
+
+# 1. Check Docker
+docker --version
+
+# 2. Run Hello World
+docker run hello-world
+
+# 3. Pull Python image
+docker pull python:3.9-slim
+
+# 4. Run interactive Python
+docker run -it python:3.9-slim
+
+# 5. Run Nginx web server
+docker run -d -p 8080:80 nginx:alpine
+
+# 6. Open browser
+http://localhost:8080
+
+[Include terminal output screenshots]
+
+================================================================================
+SLIDE 16: ESSENTIAL DOCKER COMMANDS
+Layout: Two Columns
+================================================================================
+
+Title: Essential Docker Commands
+
+Left Column - Images:
+docker pull <image>     # Download
+docker images           # List
+docker rmi <image>      # Remove
+docker build -t name .  # Build
+
+Right Column - Containers:
+docker run <image>      # Create & run
+docker ps               # List running
+docker ps -a            # List all
+docker stop <id>        # Stop
+docker rm <id>          # Remove
+docker logs <id>        # View logs
+
+Bottom:
+Cleanup: docker system prune
+
+================================================================================
+SLIDE 17: COMMON DOCKER FLAGS
+Layout: Table
+================================================================================
+
+Title: Common docker run Flags
+
+| Flag              | Purpose                    | Example                |
+|-------------------|----------------------------|------------------------|
+| -d                | Detached (background)      | docker run -d nginx    |
+| -it               | Interactive terminal       | docker run -it ubuntu  |
+| -p 8080:80        | Port mapping              | docker run -p 8080:80  |
+| --name myapp      | Custom name               | docker run --name web  |
+| -v data:/data     | Volume mount              | docker run -v data:/   |
+| -e KEY=value      | Environment variable      | docker run -e DB=prod  |
+| --rm              | Auto-remove when stopped  | docker run --rm test   |
+
+================================================================================
+SLIDE 18: PORT MAPPING EXPLAINED
+Layout: Diagram
+================================================================================
+
+Title: Port Mapping Explained
+
+Without Port Mapping:
+Your Computer          Container
+─────────────          ─────────
+                       Port 80 (isolated)
+                       ❌ Cannot access
+
+With Port Mapping:
+Your Computer          Container
+─────────────          ─────────
+Port 8080    ←────→   Port 80
+✅ Accessible          App runs here
+
+Command:
+docker run -p 8080:80 nginx
+
+Access: http://localhost:8080
+
+[DIAGRAM showing port mapping visually]
+
+================================================================================
+SLIDE 19: DOCKER USE CASES
+Layout: Three Columns
+================================================================================
+
+Title: Docker Use Cases
+
+Column 1 - Development:
+👥 Consistent teams
+🚀 Fast onboarding
+🧪 Isolated testing
+💻 Local production-like
+
+Column 2 - Production:
+📈 Easy scaling
+🔄 Rolling updates
+🛡️ Isolation & security
+☁️ Cloud-ready
+
+Column 3 - CI/CD:
+⚙️ Automated testing
+🚢 Continuous deployment
+🔁 Reproducible builds
+✅ Quality assurance
+
+================================================================================
+SLIDE 20: DOCKER COMPOSE PREVIEW
+Layout: Code Example
+================================================================================
+
+Title: Docker Compose - Multi-Container Apps 🎼
+
+Problem: Running multiple containers manually is tedious
+
+Solution: docker-compose.yml
+
+version: '3.8'
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+  
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: secret
+
+Start everything:
+docker compose up
+
+We'll cover this in Part 7!
+
+================================================================================
+SLIDE 21: BEST PRACTICES
+Layout: Two Columns
+================================================================================
+
+Title: Docker Best Practices
+
+DO ✅:
+• Use specific image tags
+• Keep images small
+• One process per container
+• Use .dockerignore
+• Run as non-root user
+• Scan for vulnerabilities
+
+DON'T ❌:
+• Store secrets in images
+• Use 'latest' in production
+• Run multiple services
+• Ignore security updates
+• Skip documentation
+• Hardcode configuration
+
+================================================================================
+SLIDE 22: COMMON PITFALLS & SOLUTIONS
+Layout: Problem-Solution
+================================================================================
+
+Title: Common Pitfalls & Solutions
+
+Problem: "Port already in use"
+Solution: docker ps → docker stop <id>
+
+Problem: "Cannot connect to Docker daemon"
+Solution: Start Docker Desktop
+
+Problem: "Image not found"
+Solution: Check spelling, docker pull first
+
+Problem: "Container exits immediately"
+Solution: docker logs <id> to debug
+
+================================================================================
+SLIDE 23: LEARNING PATH
+Layout: Roadmap
+================================================================================
+
+Title: Your Docker Learning Journey
+
+[VERTICAL ROADMAP]
+
+1. ✅ Docker Basics (Today)
+   ↓
+2. Part 1-8: Hands-On Docker
+   ↓
+3. Docker Compose
+   ↓
+4. Dockerfile Best Practices
+   ↓
+5. Multi-stage Builds
+   ↓
+6. Production Deployment
+   ↓
+7. Kubernetes (Next!)
+
+================================================================================
+SLIDE 24: RESOURCES
+Layout: Three Columns
+================================================================================
+
+Title: Resources & Next Steps
+
+Column 1 - Official:
+📖 docs.docker.com
+🌐 hub.docker.com
+🎓 docker.com/training
+📺 YouTube tutorials
+
+Column 2 - Practice:
+🧪 labs.play-with-docker.com
+💻 Our Workshop: /docker-basics/
+📚 Docker books
+🎮 Interactive tutorials
+
+Column 3 - Community:
+💬 Docker Forums
+🐦 @Docker on Twitter
+📧 Docker Newsletter
+🎤 DockerCon talks
+
+================================================================================
+SLIDE 25: KEY TAKEAWAYS
+Layout: Summary
+================================================================================
+
+Title: Key Takeaways
+
+Remember:
+
+1. 🐳 Docker packages apps with dependencies
+2. 📦 Containers are lightweight, isolated
+3. 🖼️ Images are blueprints, Containers are instances
+4. 🌐 Docker Hub stores public images
+5. ⚡ Much faster than Virtual Machines
+6. ✅ Same environment everywhere
+
+One Sentence:
+Docker solves "it works on my machine" by packaging everything together.
+
+================================================================================
+SLIDE 26: WHAT'S NEXT?
+Layout: Call to Action
+================================================================================
+
+Title: What's Next in Our Workshop?
+
+Today's Hands-On:
+✅ Part 0: Introduction (Done!)
+📝 Part 1: Containerize your first app
+📝 Part 2: Update & rebuild
+📝 Part 3: Share on Docker Hub
+📝 Part 4: Volumes (data persistence)
+📝 Part 5: Bind mounts (live editing)
+📝 Part 6: Multi-container apps
+📝 Part 7: Docker Compose
+📝 Part 8: Best practices
+
+Let's get hands-on! 🚀
+
+================================================================================
+SLIDE 27: Q&A
+Layout: Q&A
+================================================================================
+
+Title: Questions? 💬
+
+Common Questions:
+• How is Docker different from a VM?
+• Can I use Docker for production?
+• Is Docker free?
+• What about Windows containers?
+• How do I deploy to cloud?
+• What's the learning curve?
+
+[IMAGE: Question mark or discussion illustration]
+
+Let's discuss!
+
+================================================================================
+SLIDE 28: THANK YOU
+Layout: Closing Slide
+================================================================================
+
+Title: Thank You! 🙏
+
+Workshop Materials:
+📁 GitHub: github.com/sanjay3107/docker-Kubernetes-workshop
+📖 Detailed guides in each folder
+🎯 Hands-on exercises included
+💬 Ask questions anytime!
+
+Next: Open /docker-basics/part-01-containerize/
+
+Let's build something! 🚀
+
+Background: Docker blue gradient
+Logo: Docker whale logo
+
+================================================================================
+END OF DOCKER PRESENTATION
+Total Slides: 28
+Duration: 30-40 minutes
+================================================================================

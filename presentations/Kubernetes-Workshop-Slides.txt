@@ -1,0 +1,1038 @@
+# KUBERNETES BASICS - PROFESSIONAL PRESENTATION
+# Copy each slide into PowerPoint with suggested layouts
+
+================================================================================
+SLIDE 1: TITLE SLIDE
+Layout: Title Slide
+================================================================================
+
+Title: Introduction to Kubernetes
+Subtitle: Container Orchestration Made Simple
+Your Name/Institution
+Date
+
+Background: Kubernetes blue gradient (#326CE5)
+Logo: Kubernetes ship wheel logo ☸️ (top right)
+
+================================================================================
+SLIDE 2: AGENDA
+Layout: Title and Content
+================================================================================
+
+Title: What We'll Cover Today
+
+Content (Bullet points with icons):
+☸️ What is Kubernetes?
+🔥 Problems Kubernetes Solves
+🆚 Kubernetes vs Docker
+🧱 Core Concepts (Pods, Deployments, Services)
+🏗️ Kubernetes Architecture
+🎓 Hands-On Demo
+🎯 Best Practices
+🚀 Next Steps
+
+Time: 40 minutes
+
+================================================================================
+SLIDE 3: WHAT IS KUBERNETES?
+Layout: Two Content
+================================================================================
+
+Title: What is Kubernetes?
+
+Left Column:
+Definition:
+Kubernetes (K8s) is a container orchestration platform that automates deploying, scaling, and managing containerized applications.
+
+Key Points:
+• ☸️ Open-source (by Google)
+• 🚀 Automates container management
+• 📈 Scales to thousands of containers
+• 🌐 Works across multiple servers
+• 🔄 Self-healing & auto-recovery
+
+Right Column:
+[IMAGE: Kubernetes logo and cluster illustration]
+
+Pronunciation: koo-ber-net-eez
+Short form: K8s (K + 8 letters + s)
+
+================================================================================
+SLIDE 4: THE ORCHESTRA CONDUCTOR ANALOGY
+Layout: Comparison
+================================================================================
+
+Title: The Orchestra Conductor Analogy 🎼
+
+Left Side - Without Conductor:
+[IMAGE: Chaotic musicians]
+• Musicians play independently
+• No coordination
+• Chaos when mistakes happen
+• Hard to add more musicians
+• Show might fail
+
+Right Side - With Conductor:
+[IMAGE: Organized orchestra]
+• Coordinates all musicians
+• Maintains harmony
+• Replaces musicians if needed
+• Easy to scale orchestra
+• Show goes on!
+
+Bottom text (large):
+Kubernetes is the conductor for your containers! 🎼
+
+================================================================================
+SLIDE 5: THE PROBLEM - RUNNING CONTAINERS AT SCALE
+Layout: Content with Sidebar
+================================================================================
+
+Title: The Problem - Running Containers at Scale
+
+Main Content:
+Challenge: You have 100 containers in production
+
+Questions:
+• Which server runs which container? 🤔
+• What if a container crashes? 💥
+• How do you update all containers? 🔄
+• How do you scale to 200 containers? 📈
+• How do containers find each other? 🔍
+• How do you handle traffic spikes? 📊
+
+Sidebar:
+[IMAGE: Overwhelmed person]
+Manual management = IMPOSSIBLE! 😫
+
+================================================================================
+SLIDE 6: THE SOLUTION - KUBERNETES AUTOMATION
+Layout: Content
+================================================================================
+
+Title: The Solution - Kubernetes Automation
+
+You tell Kubernetes:
+"I want 100 containers of my app running"
+
+Kubernetes automatically handles:
+✅ Distributing across servers
+✅ Restarting crashed containers
+✅ Rolling updates (zero downtime)
+✅ Auto-scaling based on load
+✅ Service discovery
+✅ Load balancing
+
+Result (large text):
+You focus on code, K8s handles operations! 🚀
+
+================================================================================
+SLIDE 7: REAL EXAMPLE - SERVER CRASH (WITHOUT K8S)
+Layout: Timeline
+================================================================================
+
+Title: Scenario: Server Crashes at 3 AM
+
+WITHOUT KUBERNETES:
+
+1. Server dies → All containers die 💀
+   ↓
+2. Pager wakes you up 📱
+   ↓
+3. You SSH into backup server 💻
+   ↓
+4. Manually start containers 🔧
+   ↓
+5. Update load balancer ⚙️
+   ↓
+6. Test everything 🧪
+
+Downtime: HOURS
+Your sleep: RUINED 😴❌
+
+================================================================================
+SLIDE 8: WITH KUBERNETES - SELF-HEALING
+Layout: Timeline
+================================================================================
+
+Title: Same Scenario: Server Crashes at 3 AM
+
+WITH KUBERNETES:
+
+1. Server dies → K8s detects in seconds ⚡
+   ↓
+2. Automatically reschedules containers 🔄
+   ↓
+3. Starts them on healthy servers ✅
+   ↓
+4. Updates routing automatically 🌐
+   ↓
+5. Everything keeps running 🚀
+
+Downtime: SECONDS (or zero!)
+Your sleep: UNDISTURBED 😴✨
+
+This is the power of Kubernetes!
+
+================================================================================
+SLIDE 9: KUBERNETES VS DOCKER
+Layout: Diagram
+================================================================================
+
+Title: Kubernetes vs Docker - They Work Together!
+
+[DIAGRAM]
+┌─────────────────────────────┐
+│    Your Application         │
+│                             │
+│  ┌───────────────────────┐  │
+│  │   Kubernetes          │  │ ← Orchestrator
+│  │   (The Manager)       │  │   (Manages many)
+│  └───────────────────────┘  │
+│            ↓                │
+│  ┌───────────────────────┐  │
+│  │   Docker              │  │ ← Container Runtime
+│  │   (The Worker)        │  │   (Runs containers)
+│  └───────────────────────┘  │
+└─────────────────────────────┘
+
+Not competitors - they're TEAMMATES!
+
+================================================================================
+SLIDE 10: DOCKER VS KUBERNETES - COMPARISON
+Layout: Table
+================================================================================
+
+Title: Docker vs Kubernetes - Comparison
+
+| Feature        | Docker          | Kubernetes        |
+|----------------|-----------------|-------------------|
+| Purpose        | Run containers  | Orchestrate       |
+| Scope          | Single machine  | Multiple machines |
+| Scaling        | Manual          | Automatic         |
+| Self-healing   | ❌ No           | ✅ Yes            |
+| Load balancing | Manual          | Built-in          |
+| Updates        | Manual          | Rolling updates   |
+| Complexity     | Simple          | More complex      |
+| Best for       | Dev/Testing     | Production        |
+
+================================================================================
+SLIDE 11: THE ANALOGY
+Layout: Comparison
+================================================================================
+
+Title: Docker vs Kubernetes - The Analogy
+
+Left Side - Docker:
+[IMAGE: Single delivery truck]
+🚚 A single delivery truck
+• Carries packages (containers)
+• One route at a time
+• Manual coordination
+
+Right Side - Kubernetes:
+[IMAGE: Logistics network]
+📦 Amazon's logistics network
+• Manages thousands of trucks
+• Optimizes routes automatically
+• Handles failures gracefully
+• Scales for peak demand
+
+Bottom:
+Both are needed for modern delivery!
+
+================================================================================
+SLIDE 12: KUBERNETES ARCHITECTURE
+Layout: Diagram
+================================================================================
+
+Title: Kubernetes Architecture
+
+[LARGE DIAGRAM]
+┌─────────────────────────────────────────┐
+│       Kubernetes Cluster                │
+│                                         │
+│  ┌───────────────────────────────────┐ │
+│  │    Control Plane (Master)         │ │
+│  │  • API Server (brain)             │ │
+│  │  • Scheduler (assigns work)       │ │
+│  │  • Controller Manager (maintains) │ │
+│  │  • etcd (database)                │ │
+│  └───────────────────────────────────┘ │
+│              ↓  ↓  ↓                   │
+│  ┌────────┐ ┌────────┐ ┌────────┐     │
+│  │ Node 1 │ │ Node 2 │ │ Node 3 │     │
+│  │ [Pods] │ │ [Pods] │ │ [Pods] │     │
+│  └────────┘ └────────┘ └────────┘     │
+│   Worker     Worker     Worker         │
+└─────────────────────────────────────────┘
+
+================================================================================
+SLIDE 13: CORE CONCEPT #1 - POD
+Layout: Content with Image
+================================================================================
+
+Title: Core Concept #1 - Pod 🫘
+
+Left Content:
+What is a Pod?
+• Smallest deployable unit
+• Wraps 1 or more containers
+• Shares network & storage
+• Temporary (ephemeral)
+
+Analogy:
+A pod is a HOUSE 🏠
+where containers live together
+
+Key Points:
+• Usually 1 container per pod
+• Each pod gets unique IP
+• Pods are replaceable
+
+Right Side:
+[DIAGRAM: Pod with containers inside]
+
+================================================================================
+SLIDE 14: POD EXAMPLE
+Layout: Code Example
+================================================================================
+
+Title: Pod Example - YAML Configuration
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
+
+What this does:
+• Creates a pod named "nginx-pod"
+• Runs nginx container
+• Exposes port 80
+
+Commands:
+kubectl apply -f pod.yaml
+kubectl get pods
+
+================================================================================
+SLIDE 15: CORE CONCEPT #2 - DEPLOYMENT
+Layout: Content with Image
+================================================================================
+
+Title: Core Concept #2 - Deployment 🚀
+
+Left Content:
+What is a Deployment?
+• Manages a set of identical pods
+• Ensures desired number of replicas
+• Handles rolling updates
+• Self-healing (recreates failed pods)
+
+Analogy:
+A deployment is a FACTORY MANAGER 👷
+ensuring you always have the right number of products
+
+Right Side:
+[DIAGRAM: Deployment managing multiple pods]
+
+Key Features:
+• Desired state management
+• Automatic pod replacement
+• Zero-downtime updates
+• Rollback capability
+
+================================================================================
+SLIDE 16: DEPLOYMENT EXAMPLE
+Layout: Code Example
+================================================================================
+
+Title: Deployment Example - YAML Configuration
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3  # Always keep 3 pods
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+
+Result: 3 identical pods always running!
+
+================================================================================
+SLIDE 17: DEPLOYMENT BENEFITS
+Layout: Two Scenarios
+================================================================================
+
+Title: Deployment Benefits
+
+Scenario 1: Pod Crashes
+
+Without Deployment:
+Pod dies → Stays dead → Reduced capacity ❌
+
+With Deployment:
+Pod dies → K8s detects → Creates new pod → Full capacity restored ✅
+
+Scenario 2: Update Application
+
+Without Deployment:
+Stop all → Update → Start all → DOWNTIME! ❌
+
+With Deployment:
+Rolling update → One by one → ZERO DOWNTIME ✅
+
+================================================================================
+SLIDE 18: CORE CONCEPT #3 - SERVICE
+Layout: Content with Image
+================================================================================
+
+Title: Core Concept #3 - Service 🌐
+
+Left Content:
+What is a Service?
+• Stable network endpoint
+• Load balances across pods
+• Doesn't change when pods restart
+• Enables service discovery
+
+Analogy:
+A service is like a PHONE NUMBER 📞
+Stays the same even if you change phones
+
+Right Side:
+[DIAGRAM: Service load balancing to pods]
+
+Problem it solves:
+• Pods have changing IPs
+• Need stable way to reach them
+• Need load balancing
+
+================================================================================
+SLIDE 19: SERVICE TYPES
+Layout: Three Columns
+================================================================================
+
+Title: Service Types
+
+Column 1 - ClusterIP:
+(Default)
+• Internal only
+• Other pods can access
+• Not accessible from outside
+• Use for: Databases, internal APIs
+
+Column 2 - NodePort:
+• External access
+• Via Node IP:Port
+• Good for: Development, testing
+• Port range: 30000-32767
+
+Column 3 - LoadBalancer:
+• Cloud load balancer
+• Production-ready
+• Costs money
+• Use for: Production apps
+
+================================================================================
+SLIDE 20: SERVICE EXAMPLE
+Layout: Code Example
+================================================================================
+
+Title: Service Example - YAML Configuration
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: NodePort
+  selector:
+    app: nginx  # Routes to pods with this label
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+
+Access: http://localhost:30080
+
+Load balancing: Automatic across all nginx pods!
+
+================================================================================
+SLIDE 21: HOW SERVICES WORK
+Layout: Diagram
+================================================================================
+
+Title: How Services Work - Load Balancing
+
+[DIAGRAM]
+Request → Service → Load Balancer → Pods
+
+http://nginx-service
+         ↓
+    [Service]
+         ↓
+   Load Balancer
+    ↙    ↓    ↘
+ Pod1  Pod2  Pod3
+
+Key Point:
+Service stays STABLE, pods can come and go
+
+================================================================================
+SLIDE 22: CORE CONCEPT #4 - NAMESPACE
+Layout: Content
+================================================================================
+
+Title: Core Concept #4 - Namespace 📁
+
+What is a Namespace?
+• Virtual cluster within cluster
+• Isolates resources
+• Organizes applications
+
+Analogy: Like FOLDERS 📂 on your computer
+
+Common Namespaces:
+• default - Default namespace
+• kube-system - K8s system components
+• kube-public - Public resources
+• Your custom namespaces
+
+Use Cases:
+• Separate dev/staging/prod
+• Multi-tenant clusters
+• Team isolation
+
+================================================================================
+SLIDE 23: CORE CONCEPT #5 - CONFIGMAP & SECRET
+Layout: Comparison
+================================================================================
+
+Title: Core Concept #5 - ConfigMap & Secret
+
+Left Side - ConfigMap:
+📄 Non-sensitive configuration
+• Environment variables
+• Config files
+• Visible in plain text
+• Example: Database URL, log level
+
+Right Side - Secret:
+🔐 Sensitive data
+• Passwords, tokens, keys
+• Base64 encoded
+• Access controlled
+• Example: API keys, passwords
+
+Analogy:
+ConfigMap = Settings file
+Secret = Password manager
+
+================================================================================
+SLIDE 24: CONFIGMAP & SECRET EXAMPLE
+Layout: Code Example
+================================================================================
+
+Title: ConfigMap & Secret Example
+
+# ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  DATABASE_URL: "postgres://db:5432"
+  LOG_LEVEL: "info"
+
+---
+# Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+data:
+  password: cGFzc3dvcmQxMjM=  # base64
+
+Inject into pods as environment variables
+
+================================================================================
+SLIDE 25: KUBERNETES OBJECT HIERARCHY
+Layout: Hierarchy Diagram
+================================================================================
+
+Title: Kubernetes Object Hierarchy
+
+[TREE DIAGRAM]
+Cluster
+  └── Namespace
+        ├── Deployment
+        │     └── ReplicaSet
+        │           └── Pod
+        │                 └── Container(s)
+        │
+        ├── Service
+        │     └── Endpoints
+        │
+        ├── ConfigMap
+        └── Secret
+
+You work with: Deployment, Service, ConfigMap, Secret
+K8s manages: ReplicaSet, Pod, Endpoints
+
+================================================================================
+SLIDE 26: kubectl - THE KUBERNETES CLI
+Layout: Content
+================================================================================
+
+Title: kubectl - The Kubernetes CLI
+
+What is kubectl?
+• Command-line tool for Kubernetes
+• Communicates with API server
+• Manages all resources
+
+Pronunciation: "kube-control" or "kube-cuttle"
+
+Essential Commands:
+kubectl get pods
+kubectl describe pod <name>
+kubectl logs <pod-name>
+kubectl apply -f <file.yaml>
+kubectl delete pod <name>
+kubectl exec -it <pod> -- sh
+
+================================================================================
+SLIDE 27: LIVE DEMO - DEPLOY YOUR FIRST APP
+Layout: Terminal/Code
+================================================================================
+
+Title: DEMO - Deploy Your First App 🎉
+
+Terminal commands (large monospace):
+
+# 1. Check cluster
+kubectl cluster-info
+
+# 2. Create deployment
+kubectl create deployment nginx --image=nginx
+
+# 3. View pods
+kubectl get pods
+
+# 4. Expose service
+kubectl expose deployment nginx --port=80 --type=NodePort
+
+# 5. Get service
+kubectl get services
+
+# 6. Access in browser
+http://localhost:<nodePort>
+
+================================================================================
+SLIDE 28: DEMO - SCALING
+Layout: Terminal/Code
+================================================================================
+
+Title: DEMO - Scaling in Action 📈
+
+# Scale to 5 replicas
+kubectl scale deployment nginx --replicas=5
+
+# Watch pods being created
+kubectl get pods -w
+
+# Verify
+kubectl get pods
+
+Result: 5 pods running instantly! ⚡
+
+# Delete one pod (watch it recreate!)
+kubectl delete pod <pod-name>
+
+Watch it recreate automatically! ✨
+
+================================================================================
+SLIDE 29: DEMO - ROLLING UPDATE
+Layout: Terminal/Code
+================================================================================
+
+Title: DEMO - Rolling Update (Zero Downtime) 🔄
+
+# Update image version
+kubectl set image deployment/nginx nginx=nginx:1.25
+
+# Watch rolling update
+kubectl rollout status deployment/nginx
+
+# View history
+kubectl rollout history deployment/nginx
+
+# Rollback if needed
+kubectl rollout undo deployment/nginx
+
+Zero downtime! Old pods replaced gradually.
+
+================================================================================
+SLIDE 30: KUBERNETES BENEFITS SUMMARY
+Layout: Three Columns
+================================================================================
+
+Title: Kubernetes Benefits Summary
+
+Column 1 - For Developers:
+✅ Focus on code, not infrastructure
+✅ Consistent environments
+✅ Easy local testing
+✅ Self-service deployments
+
+Column 2 - For Operations:
+✅ Automated operations
+✅ Self-healing systems
+✅ Easy scaling
+✅ Declarative configuration
+
+Column 3 - For Business:
+✅ Reduced downtime
+✅ Faster deployments
+✅ Better resource utilization
+✅ Multi-cloud flexibility
+
+================================================================================
+SLIDE 31: WHEN TO USE KUBERNETES?
+Layout: Two Columns
+================================================================================
+
+Title: When to Use Kubernetes?
+
+Left - ✅ Good Use Cases:
+• Microservices architecture
+• High availability needs
+• Auto-scaling requirements
+• Multi-environment deployments
+• Container-based applications
+• Cloud-native apps
+• Large teams
+
+Right - ❌ Maybe Not:
+• Simple single-server apps
+• Legacy monoliths (no containers)
+• Very small teams/projects
+• Learning curve too steep
+• Limited resources
+• Static workloads
+
+================================================================================
+SLIDE 32: KUBERNETES ECOSYSTEM
+Layout: Grid
+================================================================================
+
+Title: Kubernetes Ecosystem
+
+Core:
+☸️ Kubernetes
+🐳 Docker/containerd
+📦 Helm (package manager)
+
+Monitoring:
+📊 Prometheus
+📈 Grafana
+🔍 ELK Stack
+
+Service Mesh:
+🕸️ Istio
+🔗 Linkerd
+
+CI/CD:
+🔄 ArgoCD
+🚀 Flux
+⚙️ Jenkins X
+
+================================================================================
+SLIDE 33: KUBERNETES DISTRIBUTIONS
+Layout: Two Columns
+================================================================================
+
+Title: Kubernetes Distributions
+
+Left - Managed Services (Easy):
+• Google Kubernetes Engine (GKE)
+• Amazon EKS
+• Azure AKS
+• DigitalOcean Kubernetes
+• IBM Cloud Kubernetes
+
+Right - Self-Managed:
+• kubeadm (official)
+• k3s (lightweight)
+• MicroK8s
+• OpenShift
+• Rancher
+
+Local Development:
+• Docker Desktop ✅
+• Minikube
+• kind (K8s in Docker)
+
+================================================================================
+SLIDE 34: BEST PRACTICES
+Layout: Two Columns
+================================================================================
+
+Title: Kubernetes Best Practices
+
+Left - Resource Management:
+✅ Set resource requests/limits
+✅ Use namespaces for isolation
+✅ Implement health checks
+✅ Use horizontal pod autoscaling
+
+Right - Security:
+✅ Use RBAC
+✅ Scan images for vulnerabilities
+✅ Use Secrets for sensitive data
+✅ Network policies
+✅ Run as non-root
+
+Reliability:
+✅ Multiple replicas for HA
+✅ Use rolling updates
+✅ Implement monitoring
+✅ Regular backups
+
+================================================================================
+SLIDE 35: COMMON PITFALLS TO AVOID
+Layout: Two Columns
+================================================================================
+
+Title: Common Pitfalls to Avoid
+
+Left - ❌ DON'T:
+• Run without resource limits
+• Use 'latest' tag in production
+• Store secrets in ConfigMaps
+• Ignore monitoring/logging
+• Deploy directly to production
+• Run as root user
+• Skip health checks
+
+Right - ✅ DO:
+• Set proper resource requests/limits
+• Use specific version tags
+• Use Secrets for sensitive data
+• Implement observability
+• Use staging environments
+• Run as non-root
+• Configure readiness/liveness probes
+
+================================================================================
+SLIDE 36: LEARNING PATH
+Layout: Roadmap
+================================================================================
+
+Title: Your Kubernetes Learning Journey
+
+[VERTICAL ROADMAP]
+
+1. ✅ Kubernetes Basics (Today)
+   ↓
+2. Deploy Multi-Container Apps
+   ↓
+3. ConfigMaps, Secrets, Volumes
+   ↓
+4. Scaling & Auto-scaling (HPA)
+   ↓
+5. Rolling Updates & Rollbacks
+   ↓
+6. Monitoring & Logging
+   ↓
+7. Production Deployment
+   ↓
+8. Advanced Topics (Service Mesh, etc.)
+
+================================================================================
+SLIDE 37: HANDS-ON EXERCISE
+Layout: Exercise
+================================================================================
+
+Title: Hands-On Exercise (5 minutes) 🧪
+
+Try This Now:
+
+1. Create a deployment:
+   kubectl create deployment hello --image=nginx
+
+2. Scale it:
+   kubectl scale deployment hello --replicas=3
+
+3. Expose it:
+   kubectl expose deployment hello --port=80 --type=NodePort
+
+4. Access in browser
+   kubectl get services
+
+5. Clean up:
+   kubectl delete deployment hello
+   kubectl delete service hello
+
+================================================================================
+SLIDE 38: KEY TAKEAWAYS
+Layout: Summary
+================================================================================
+
+Title: Key Takeaways
+
+Remember:
+
+1. ☸️ Kubernetes orchestrates containers at scale
+2. 🫘 Pods are the smallest unit
+3. 🚀 Deployments manage desired state
+4. 🌐 Services provide stable networking
+5. 🔄 Self-healing is automatic
+6. 📈 Scaling is easy
+7. 🎯 Declarative configuration (YAML)
+
+One Sentence:
+Kubernetes automates everything you'd do manually to run containers in production.
+
+================================================================================
+SLIDE 39: QUICK REFERENCE
+Layout: Cheat Sheet
+================================================================================
+
+Title: Quick Reference - Essential Commands
+
+# Cluster
+kubectl cluster-info
+kubectl get nodes
+
+# Pods
+kubectl get pods
+kubectl logs <pod>
+kubectl exec -it <pod> -- sh
+
+# Deployments
+kubectl get deployments
+kubectl scale deployment <name> --replicas=3
+kubectl rollout status deployment/<name>
+
+# Services
+kubectl get services
+kubectl expose deployment <name> --port=80
+
+# Apply YAML
+kubectl apply -f <file.yaml>
+kubectl delete -f <file.yaml>
+
+# Everything
+kubectl get all
+
+================================================================================
+SLIDE 40: RESOURCES
+Layout: Three Columns
+================================================================================
+
+Title: Resources & Learning Materials
+
+Column 1 - Official:
+📖 kubernetes.io/docs
+🎓 kubernetes.io/training
+🧪 Interactive Tutorial
+📺 KubeCon talks
+
+Column 2 - Practice:
+🎮 labs.play-with-k8s.com
+💻 Our Workshop
+📚 "Kubernetes Up & Running"
+🔧 Hands-on labs
+
+Column 3 - Community:
+💬 Kubernetes Slack
+🐦 @kubernetesio
+📧 Kubernetes Newsletter
+🎤 CNCF events
+
+================================================================================
+SLIDE 41: WHAT'S NEXT IN WORKSHOP?
+Layout: Call to Action
+================================================================================
+
+Title: What's Next in Our Workshop?
+
+Today's Hands-On:
+✅ Part 0: Introduction (Done!)
+📝 Deploy real app (Node.js + Redis)
+📝 Use ConfigMaps & Secrets
+📝 Implement health checks
+📝 Set up auto-scaling (HPA)
+📝 Perform rolling updates
+📝 Practice troubleshooting
+
+GitHub:
+github.com/sanjay3107/docker-Kubernetes-workshop
+
+Let's deploy something real! 🚀
+
+================================================================================
+SLIDE 42: Q&A
+Layout: Q&A
+================================================================================
+
+Title: Questions? 💬
+
+Common Questions:
+• How is Kubernetes different from Docker?
+• Do I need Kubernetes for my project?
+• How hard is it to learn?
+• What about costs?
+• Can I run it locally?
+• How do I migrate existing apps?
+• What about monitoring?
+
+[IMAGE: Discussion or Q&A illustration]
+
+Let's discuss!
+
+================================================================================
+SLIDE 43: THANK YOU
+Layout: Closing Slide
+================================================================================
+
+Title: Thank You! 🙏
+
+Workshop Materials:
+📁 GitHub: github.com/sanjay3107/docker-Kubernetes-workshop
+📖 Detailed guides in each folder
+🎯 Hands-on exercises included
+💬 Ask questions anytime!
+
+Next: Deploy your first real application!
+
+cd ../../step-04-kubernetes
+
+Let's orchestrate some containers! ☸️🚀
+
+Background: Kubernetes blue gradient
+Logo: Kubernetes ship wheel logo
+
+================================================================================
+END OF KUBERNETES PRESENTATION
+Total Slides: 43
+Duration: 40-50 minutes
+================================================================================
