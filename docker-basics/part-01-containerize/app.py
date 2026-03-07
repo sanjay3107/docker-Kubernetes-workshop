@@ -1,16 +1,18 @@
 from flask import Flask
 import os
+import platform
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return '''
+    hostname = platform.node()[:12]
+    return f'''
     <html>
         <head>
             <title>My First Docker App</title>
             <style>
-                body {
+                body {{
                     font-family: Arial, sans-serif;
                     max-width: 600px;
                     margin: 50px auto;
@@ -18,16 +20,16 @@ def hello():
                     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                     color: white;
                     text-align: center;
-                }
-                .container {
+                }}
+                .container {{
                     background: rgba(255, 255, 255, 0.1);
                     padding: 30px;
                     border-radius: 10px;
                     backdrop-filter: blur(10px);
-                }
-                h1 { font-size: 2.5em; margin: 0; }
-                p { font-size: 1.2em; }
-                .emoji { font-size: 3em; }
+                }}
+                h1 {{ font-size: 2.5em; margin: 0; }}
+                p {{ font-size: 1.2em; }}
+                .emoji {{ font-size: 3em; }}
             </style>
         </head>
         <body>
@@ -35,11 +37,11 @@ def hello():
                 <div class="emoji">🐳</div>
                 <h1>Hello from Docker!</h1>
                 <p>Your first containerized application is running!</p>
-                <p><strong>Container ID:</strong> {}</p>
+                <p><strong>Container ID:</strong> {hostname}</p>
             </div>
         </body>
     </html>
-    '''.format(os.uname().nodename[:12])
+    '''
 
 @app.route('/health')
 def health():
