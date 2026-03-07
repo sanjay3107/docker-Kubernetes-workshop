@@ -22,7 +22,7 @@ def hello():
                     text-align: center;
                 }}
                 .container {{
-                    background: rgba(255, 255, 255, 0.1);
+                    background: rgba(300, 300, 300, 0.1);
                     padding: 30px;
                     border-radius: 10px;
                     backdrop-filter: blur(10px);
