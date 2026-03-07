@@ -15,30 +15,36 @@ def hello():
             <title>My Docker App v2.0</title>
             <style>
                 body {{
-                    font-family: Arial, sans-serif;
+                    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
                     max-width: 600px;
                     margin: 50px auto;
                     padding: 20px;
-                    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-                    color: cyan;
+                    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                    color: #f0f8ff;
                     text-align: center;
                 }}
                 .container {{
-                    background: rgba(255, 255, 255, 0.1);
-                    padding: 30px;
-                    border-radius: 10px;
-                    backdrop-filter: blur(10px);
+                    background: rgba(255, 255, 255, 0.15);
+                    padding: 40px;
+                    border-radius: 16px;
+                    backdrop-filter: blur(12px);
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
                 }}
-                h1 {{ font-size: 2.5em; margin: 0; }}
-                p {{ font-size: 1.2em; }}
-                .emoji {{ font-size: 3em; }}
+                h1 {{ font-size: 2.8em; margin: 0; font-weight: 700; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }}
+                p {{ font-size: 1.25em; line-height: 1.6; }}
+                .emoji {{ font-size: 3.5em; margin-bottom: 15px; }}
                 .badge {{
-                    background: #4CAF50;
-                    padding: 5px 15px;
-                    border-radius: 20px;
-                    font-size: 0.8em;
+                    background: linear-gradient(90deg, #ff8a00, #e52e71);
+                    padding: 8px 18px;
+                    border-radius: 25px;
+                    font-size: 0.85em;
+                    font-weight: bold;
+                    color: white;
                     display: inline-block;
-                    margin: 10px 0;
+                    margin: 15px 0;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    box-shadow: 0 4px 15px rgba(229, 46, 113, 0.4);
                 }}
             </style>
         </head>
