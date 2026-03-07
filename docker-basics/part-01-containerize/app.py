@@ -35,8 +35,8 @@ def hello():
         <body>
             <div class="container">
                 <div class="emoji">🐳</div>
-                <h1>Hello from Docker!</h1>
-                <p>Your first containerized application is running!</p>
+                <h1>SSUp from Sia!</h1>
+                <p>Your first containerized application is running congrats!</p>
                 <p><strong>Container ID:</strong> {hostname}</p>
             </div>
         </body>
