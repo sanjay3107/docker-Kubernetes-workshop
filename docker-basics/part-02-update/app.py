@@ -1,17 +1,20 @@
 from flask import Flask
 import os
+import platform
 import datetime
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return '''
+    hostname = platform.node()[:12]
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return f'''
     <html>
         <head>
             <title>My Docker App v2.0</title>
             <style>
-                body {
+                body {{
                     font-family: Arial, sans-serif;
                     max-width: 600px;
                     margin: 50px auto;
@@ -19,24 +22,24 @@ def hello():
                     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
                     color: white;
                     text-align: center;
-                }
-                .container {
+                }}
+                .container {{
                     background: rgba(255, 255, 255, 0.1);
                     padding: 30px;
                     border-radius: 10px;
                     backdrop-filter: blur(10px);
-                }
-                h1 { font-size: 2.5em; margin: 0; }
-                p { font-size: 1.2em; }
-                .emoji { font-size: 3em; }
-                .badge {
+                }}
+                h1 {{ font-size: 2.5em; margin: 0; }}
+                p {{ font-size: 1.2em; }}
+                .emoji {{ font-size: 3em; }}
+                .badge {{
                     background: #4CAF50;
                     padding: 5px 15px;
                     border-radius: 20px;
                     font-size: 0.8em;
                     display: inline-block;
                     margin: 10px 0;
-                }
+                }}
             </style>
         </head>
         <body>
@@ -45,12 +48,12 @@ def hello():
                 <h1>Hello from Docker v2.0!</h1>
                 <div class="badge">UPDATED VERSION</div>
                 <p>Your application has been updated and rebuilt!</p>
-                <p><strong>Container ID:</strong> {}</p>
-                <p><strong>Current Time:</strong> {}</p>
+                <p><strong>Container ID:</strong> {hostname}</p>
+                <p><strong>Current Time:</strong> {now}</p>
             </div>
         </body>
     </html>
-    '''.format(os.uname().nodename[:12], datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    '''
 
 @app.route('/health')
 def health():
