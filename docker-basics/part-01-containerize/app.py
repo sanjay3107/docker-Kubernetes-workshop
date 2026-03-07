@@ -1,5 +1,4 @@
-from flask import Flask
-import os
+from flask import Flask, jsonify
 import platform
 
 app = Flask(__name__)
@@ -7,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     hostname = platform.node()[:12]
-    return f'''
+    return f"""
     <html>
         <head>
             <title>My First Docker App</title>
@@ -35,17 +34,17 @@ def hello():
         <body>
             <div class="container">
                 <div class="emoji">🐳</div>
-                <h1>Hello from Docker!</h1>
+                <h1>Hello from Docker Application!</h1>
                 <p>Your first containerized application is running!</p>
                 <p><strong>Container ID:</strong> {hostname}</p>
             </div>
         </body>
     </html>
-    '''
+    """
 
 @app.route('/health')
 def health():
-    return {'status': 'healthy', 'message': 'App is running!'}
+    return jsonify({'status': 'healthy', 'message': 'App is running!'})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
