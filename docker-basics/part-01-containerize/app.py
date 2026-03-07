@@ -7,14 +7,18 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     hostname = platform.node()[:12]
+    system = platform.system()
+    python_version = platform.python_version()
+    env = os.environ.get("ENVIRONMENT", "Development")
+
     return f'''
     <html>
         <head>
-            <title>My First Docker App</title>
+            <title>Docker Kubernetes Workshop App</title>
             <style>
                 body {{
                     font-family: Arial, sans-serif;
-                    max-width: 600px;
+                    max-width: 700px;
                     margin: 50px auto;
                     padding: 20px;
                     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -30,14 +34,28 @@ def hello():
                 h1 {{ font-size: 2.5em; margin: 0; }}
                 p {{ font-size: 1.2em; }}
                 .emoji {{ font-size: 3em; }}
+                .info {{
+                    margin-top: 20px;
+                    padding: 15px;
+                    background: rgba(0,0,0,0.2);
+                    border-radius: 8px;
+                }}
             </style>
         </head>
         <body>
             <div class="container">
                 <div class="emoji">🐳</div>
-                <h1>Hello from Docker!</h1>
-                <p>Your first containerized application is running!</p>
-                <p><strong>Container ID:</strong> {hostname}</p>
+                <h1>Hello from Docker & Kubernetes!</h1>
+                <p>Your containerized Flask application is running successfully.</p>
+
+                <div class="info">
+                    <p><strong>Container ID:</strong> {hostname}</p>
+                    <p><strong>Operating System:</strong> {system}</p>
+                    <p><strong>Python Version:</strong> {python_version}</p>
+                    <p><strong>Environment:</strong> {env}</p>
+                </div>
+
+                <p>This application was modified by Kshitij for the Docker Kubernetes Workshop.</p>
             </div>
         </body>
     </html>
@@ -45,7 +63,10 @@ def hello():
 
 @app.route('/health')
 def health():
-    return {'status': 'healthy', 'message': 'App is running!'}
+    return {
+        'status': 'healthy',
+        'message': 'Application is running successfully!'
+    }
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
