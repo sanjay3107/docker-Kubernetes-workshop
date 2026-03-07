@@ -20,7 +20,7 @@ def hello():
                     margin: 50px auto;
                     padding: 20px;
                     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-                    color: white;
+                    color: cyan;
                     text-align: center;
                 }}
                 .container {{
