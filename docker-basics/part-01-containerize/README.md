@@ -26,6 +26,72 @@ part-01-containerize/
 
 ---
 
+## 🧰 Prerequisite: Install Docker Desktop (Windows / Mac)
+
+You need Docker running locally before you can build and run containers.
+
+### Windows (Docker Desktop)
+
+1. Download Docker Desktop:
+   - https://www.docker.com/products/docker-desktop/
+2. Install it and restart your computer if prompted.
+3. Open **Docker Desktop** and wait until it shows **Docker Engine is running**.
+4. Verify in a terminal:
+   ```bash
+   docker --version
+   docker info
+   ```
+
+### macOS (Docker Desktop)
+
+1. Download Docker Desktop:
+   - https://www.docker.com/products/docker-desktop/
+2. Install and open **Docker Desktop**.
+3. Verify in a terminal:
+   ```bash
+   docker --version
+   docker info
+   ```
+
+---
+
+## 👋 Quick Start: Run the Official “Welcome to Docker” / hello-world Image
+
+Before we containerize our own app, let's make sure Docker works end-to-end.
+
+### Step 0.1: Run hello-world (fast verification)
+
+```bash
+docker run hello-world
+```
+
+You should see a message like “Hello from Docker!” confirming Docker can:
+- pull an image from Docker Hub
+- create a container
+- run it successfully
+
+### Step 0.2: Run the Welcome to Docker demo (optional)
+
+If you want a more visual welcome demo:
+
+```bash
+docker run -d -p 8088:80 --name welcome docker/welcome-to-docker
+```
+
+Then open:
+- http://localhost:8088
+
+### Step 0.3: Verify and clean up
+
+```bash
+docker ps
+docker logs welcome
+docker stop welcome
+docker rm welcome
+```
+
+---
+
 ## 📝 Step-by-Step Instructions
 
 ### Step 1: Understand the Application
